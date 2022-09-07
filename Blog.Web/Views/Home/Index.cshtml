@@ -1,8 +1,50 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<Blog.Entities.Post>
+@{
+    ViewData["Title"] = "Index";
 }
+<table id="dtBlog" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PublishedAt)
+            </th>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    #
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    <span span class="d-inline-block text-truncate" style="max-width: 250px;">
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </span>
+             
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PublishedAt)
+                </td>
+ 
+                <td >
+                    <a asp-action="Details" class="btn btn-sm btn-primary" asp-route-id="@item.Id">View</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

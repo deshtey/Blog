@@ -102,17 +102,19 @@ namespace Blog.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
+                    b.Property<string>("AuthorId")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("BlogUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("PublicationDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("PublicationDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -120,6 +122,8 @@ namespace Blog.Data.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BlogUserId");
 
                     b.ToTable("Posts");
                 });
@@ -261,6 +265,13 @@ namespace Blog.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Blog.Domain.Entities.Post", b =>
+                {
+                    b.HasOne("Blog.Domain.Entities.BlogUser", null)
+                        .WithMany("BlogEntries")
+                        .HasForeignKey("BlogUserId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -310,6 +321,11 @@ namespace Blog.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Blog.Domain.Entities.BlogUser", b =>
+                {
+                    b.Navigation("BlogEntries");
                 });
 #pragma warning restore 612, 618
         }

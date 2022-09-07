@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging.Abstractions;
 using System.ComponentModel.DataAnnotations;
 
 namespace Blog.Domain.Entities
@@ -9,5 +10,6 @@ namespace Blog.Domain.Entities
         [Required]
 
         public string Name { get; set; }
+        public virtual ICollection<Post>? BlogEntries { get; set; }
     }
 }

@@ -24,7 +24,7 @@ namespace Blog.Domain.Data
             modelBuilder.Entity<Post>(
                 p=>
                 {
-                    p.Property(p => p.CreatedBy).HasMaxLength(200);
+                    p.Property(p => p.AuthorId).HasMaxLength(200);
                     p.Property(p => p.Title).HasMaxLength(200);
                     p.Ignore(p => p.User);
 

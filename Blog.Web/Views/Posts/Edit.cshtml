@@ -1,4 +1,4 @@
-﻿@model Blog.Domain.Entities.Post
+﻿@model Blog.Entities.Post
 
 
 @{
@@ -24,16 +24,8 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="PublicationDate" class="control-label"></label>
-                <input asp-for="PublicationDate" class="form-control" />
-                <span asp-validation-for="PublicationDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedBy" class="control-label"></label>
-                <input asp-for="CreatedBy" class="form-control" />
-                <span asp-validation-for="CreatedBy" class="text-danger"></span>
-            </div>
+  
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

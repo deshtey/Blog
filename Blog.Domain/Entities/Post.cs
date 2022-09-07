@@ -11,8 +11,8 @@ namespace Blog.Domain.Entities
      
         [Required(ErrorMessage = "Please include a description")]
         public string Description { get; set; }
-        public DateTime PublicationDate { get; set; }
-        public string CreatedBy { get; set; }
+        public DateTimeOffset PublicationDate { get; set; }
+        public string? AuthorId { get; set; }
         public virtual BlogUser User { get; set; }
 
     }

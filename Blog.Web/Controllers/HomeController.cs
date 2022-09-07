@@ -1,4 +1,4 @@
-﻿using Blog.Domain.Data;
+﻿using Blog.Data;
 using Blog.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -7,19 +7,35 @@ namespace Blog.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly IBlogRepository _repository;
+        private readonly IBlogService _repository;
 
-        public HomeController(ILogger<HomeController> logger, IBlogRepository repository)
-        {
-            _logger = logger;
+        public HomeController( IBlogService repository)
+        {      
             _repository = repository;
         }
 
         public async Task<IActionResult> Index()
         {
             var posts = await _repository.GetPostsAsync();
-            return View();
+            return View(posts);
+        }
+
+        // GET: Posts/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var post = await _repository.GetPostsByIdAsync(id);
+
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            return View(post);
         }
 
         public IActionResult Privacy()

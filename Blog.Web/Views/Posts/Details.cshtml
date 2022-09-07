@@ -1,4 +1,4 @@
-﻿@model Blog.Domain.Entities.Post
+﻿@model Blog.Entities.Post
 
 @{
     ViewData["Title"] = "Details";
@@ -23,16 +23,17 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PublicationDate)
+            @Html.DisplayNameFor(model => model.PublishedAt)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PublicationDate)
+            @Html.DisplayFor(model => model.PublishedAt)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedBy)
+            @Html.DisplayNameFor(model => model.Author)
+            @Html.DisplayNameFor(model => model.Author)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedBy)
+            @Html.DisplayFor(model => model.Author.FullName)
         </dd>
     </dl>
 </div>

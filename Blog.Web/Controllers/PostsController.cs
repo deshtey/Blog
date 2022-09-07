@@ -1,48 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Blog.Domain.Data;
-using Blog.Domain.Entities;
+﻿using Blog.Data;
+using Blog.Entities;
 using Blog.Web.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Web
 {
+    [Authorize]
     public class PostsController : Controller
     {
-        private readonly IBlogRepository _repository;
+        private readonly IBlogService _repository;
+        private readonly UserManager<BlogUser> _userManager;
 
-        public PostsController(IBlogRepository repository)
+        public PostsController(IBlogService repository, UserManager<BlogUser> userManager)
         {
             _repository = repository;
+            _userManager = userManager;
         }
 
         // GET: Posts
         public async Task<IActionResult> Index()
         {
-            return View(await _repository.GetPostsAsync());
+            var user = _userManager.GetUserId(User);
+            return View(await _repository.GetPostsByUserAsync(user));
         }
 
-        // GET: Posts/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var post = await _repository.GetPostsByIdAsync(id);
-            
-            if (post == null)
-            {
-                return NotFound();
-            }
-
-            return View(post);
-        }
 
         // GET: Posts/Create
         public IActionResult Create()
@@ -59,10 +43,11 @@ namespace Blog.Web
         {
             if (ModelState.IsValid)
             {
+                var userId = _userManager.GetUserId(User);
                 Post post = new()
                 {
-                    PublicationDate = DateTime.Now,
-                    CreatedBy = "SImon",
+                    PublishedAt = DateTime.Now,
+                    AuthorId = userId,
                     Title = postVm.Title,
                     Description = postVm.Description
                 };
@@ -72,6 +57,23 @@ namespace Blog.Web
             return View(postVm);
         }
 
-        
+        // GET: Posts/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var post = await _repository.GetPostsByIdAsync(id);
+
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            return View(post);
+        }
+
     }
 }
