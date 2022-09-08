@@ -12,6 +12,8 @@ namespace Blog.Entities
      
         [Required(ErrorMessage = "Please include a description")]
         public string Description { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}", ApplyFormatInEditMode = true)]
         public DateTimeOffset PublishedAt { get; set; }
 
         [ForeignKey("Id")]

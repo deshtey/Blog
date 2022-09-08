@@ -1,6 +1,6 @@
 ﻿using Blog.Entities;
 
-namespace Blog.Data
+namespace Blog.Web.Interfaces
 {
     public interface IBlogService
     {

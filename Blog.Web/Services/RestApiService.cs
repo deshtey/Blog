@@ -1,10 +1,10 @@
 ﻿using Blog.Data;
 using Blog.Entities;
-using Blog.Web.Data;
+using Blog.Web.Interfaces;
 using Blog.Web.Models;
 namespace Blog.Web.Services
 {
- 
+
     public class RestApiService : IRestApiService
     {
         private readonly HttpClient _httpClient;

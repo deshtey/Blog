@@ -1,5 +1,6 @@
 ﻿using Blog.Data;
 using Blog.Entities;
+using Blog.Web.Interfaces;
 using Blog.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

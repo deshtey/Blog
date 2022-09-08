@@ -1,5 +1,6 @@
 ﻿using Blog.Data;
 using Blog.Entities;
+using Blog.Web.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Web
@@ -23,6 +24,7 @@ namespace Blog.Web
         {
             return await _context.Posts
                 .Include(p=>p.Author)
+                .AsNoTracking()
                 .ToListAsync();      
         }
 
@@ -31,7 +33,8 @@ namespace Blog.Web
             var post = await _context
                 .Posts
                   .Include(p => p.Author)
-                .Where(p => p.Id == Id)              
+                .Where(p => p.Id == Id)  
+                .AsNoTracking()
                 .FirstOrDefaultAsync();
             return post;
         }
@@ -42,6 +45,7 @@ namespace Blog.Web
             var posts = await _context
                 .Posts
                 .Where(p=>p.AuthorId==UserId)
+                .AsNoTracking()
                 .ToListAsync();
             return posts;
         }
@@ -53,6 +57,7 @@ namespace Blog.Web
                 .Posts
                 .Where(p => p.AuthorId == UserId)
                 .OrderByDescending(p=>p.PublishedAt)
+                .AsNoTracking()
                 .ToListAsync();
             return posts;
         }

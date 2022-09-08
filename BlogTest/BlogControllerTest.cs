@@ -1,6 +1,7 @@
 ﻿using Blog.Data;
 using Blog.Entities;
 using Blog.Web.Controllers;
+using Blog.Web.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;

@@ -2,10 +2,10 @@ using Blog.Data;
 using Blog.Entities;
 using Blog.Web;
 using Microsoft.EntityFrameworkCore;
-using Blog.Web.Data;
 using Blog.Web.Services;
 using Hangfire;
 using Hangfire.SqlServer;
+using Blog.Web.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
