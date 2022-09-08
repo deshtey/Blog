@@ -11,7 +11,7 @@ namespace BlogTest
     public class BlogControllerTest
     {
         [Fact]
-        public async Task IndexReturnsARedirectToIndexHomeWhenIdIsNull()
+        public async Task IndexReturnsAView()
         {
             // Arrange
             var controller = new HomeController(repository: null);

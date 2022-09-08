@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Blog.Web.Migrations
 {
-    public partial class initial : Migration
+    public partial class seeduser : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,7 +49,6 @@ namespace Blog.Web.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
-            migrationBuilder.InsertData("AspNetUsers", new[] { "LookupName", "Value", "Text" }, new object[] { "TestData", true, "Test description" });
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
@@ -178,6 +177,11 @@ namespace Blog.Web.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DateRegistered", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "B22698B8-42A2-4115-9631-1C2D1E2AC5F7", 5, "00000000-0000-0000-0000-000000000000", new DateTime(2022, 9, 8, 18, 33, 18, 457, DateTimeKind.Local).AddTicks(4116), "Admin@Admin.com", true, "Admin", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEO9ZAsAJ++1LF8u7gH/qRz2B/06q+GZfhTJHU7pBUszne04lVVEIPj6Hhg+aWEjyrQ==", "XXXXXXXXXXXXX", true, "00000000-0000-0000-0000-000000000000", false, "Admin@Admin.com" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

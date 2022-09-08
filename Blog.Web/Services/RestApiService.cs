@@ -2,8 +2,6 @@
 using Blog.Entities;
 using Blog.Web.Data;
 using Blog.Web.Models;
-using Microsoft.EntityFrameworkCore;
-
 namespace Blog.Web.Services
 {
  
@@ -11,10 +9,13 @@ namespace Blog.Web.Services
     {
         private readonly HttpClient _httpClient;
         private readonly ApplicationDbContext _context;
+        //private readonly Logger<RestApiService> _logger;
+
         public RestApiService(HttpClient httpClient, ApplicationDbContext context)
         {
             _httpClient = httpClient;
             _context = context;
+            //_logger = logger;
         }
         public async Task FetchOldPosts(string endpoint)
         {
@@ -28,6 +29,7 @@ namespace Blog.Web.Services
                     //Return immediately if no articles returned                   
                     if (apiResponse.Count == 0) return;
                     //Bulk insert??
+                    //Insert All posts using the system created admin login
                     foreach (var article in apiResponse.Articles)
                     {
                         var post = new Post
@@ -35,7 +37,7 @@ namespace Blog.Web.Services
                             PublishedAt = article.PublishedAt,
                             Title = article.Title,
                             Description = article.Description,
-                            AuthorId = "aa6a5495-b191-4567-929a-4e9d9c7f492b"
+                            AuthorId = "B22698B8-42A2-4115-9631-1C2D1E2AC5F7"
                         };
                         _context.Add(post);
                     }
@@ -44,10 +46,9 @@ namespace Blog.Web.Services
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                //_logger.LogError(ex.Message);
             }
 
 

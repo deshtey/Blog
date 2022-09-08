@@ -45,5 +45,16 @@ namespace Blog.Web
                 .ToListAsync();
             return posts;
         }
+
+        public async Task<IEnumerable<Post>> GetSortedPostsByUserAsync(string UserId)
+        {
+            //Filter posts by the userId
+            var posts = await _context
+                .Posts
+                .Where(p => p.AuthorId == UserId)
+                .OrderByDescending(p=>p.PublishedAt)
+                .ToListAsync();
+            return posts;
+        }
     }
 }

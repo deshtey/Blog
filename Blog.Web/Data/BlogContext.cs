@@ -21,8 +21,8 @@ namespace Blog.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-             //modelBuilder.ApplyConfiguration(new AdminConfiguration());
+            //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+             modelBuilder.ApplyConfiguration(new AdminConfiguration());
             //Fluent API configurations
             //modelBuilder.Entity<Post>(
             //    p =>

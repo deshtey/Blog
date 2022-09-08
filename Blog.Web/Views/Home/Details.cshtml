@@ -3,40 +3,25 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Details</h1>
-
 <div>
-    <h4>Post</h4>
+
+
+    <h4 class="text-center">
+        @Html.DisplayFor(model => model.Title)
+    </h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PublishedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PublishedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Author.FullName)
-        </dd>
-    </dl>
+    <p>
+        @Html.DisplayFor(model => model.Description)
+    </p>
+
+    <hr />
+    <p>
+        @Html.DisplayFor(model => model.PublishedAt) |
+        @Html.DisplayFor(model => model.Author.FullName)
+    </p>
+
 </div>
 <div>
 
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to Posts</a>
 </div>

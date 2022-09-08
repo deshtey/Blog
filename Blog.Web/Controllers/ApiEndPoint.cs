@@ -18,7 +18,7 @@ namespace Blog.Web.Controllers
         {
             var EndpointURI = _configuration["OldBlogEndpoint"];
             RecurringJob.AddOrUpdate(() => _apiService.FetchOldPosts(EndpointURI), Cron.Minutely);
-            return Ok($"The recurring job has been scheduled for user with mail:.");
+            return Ok($"Posts Fetched Successfully.");
         }
     }
 }

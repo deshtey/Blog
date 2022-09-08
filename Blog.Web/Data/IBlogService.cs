@@ -8,6 +8,6 @@ namespace Blog.Data
         Task<Post> GetPostsByIdAsync(int? Id);
         Task<Post> AddPost(Post post);
         Task<IEnumerable<Post>> GetPostsByUserAsync(string UserId);
-
+        Task<IEnumerable<Post>> GetSortedPostsByUserAsync(string UserId);
     }
 }
