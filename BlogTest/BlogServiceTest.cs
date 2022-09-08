@@ -19,7 +19,8 @@ namespace BlogTest
             // Arrange
             var blogServiceMock = new Mock<BlogService>();
             var res = blogServiceMock.Setup(b => b.GetPostsAsync());
-
+            //Assert
+            var contentResult = Assert.IsType<ContentResult>(res);
         }
     }
 }

@@ -1,5 +1,8 @@
-﻿using Blog.Web.Controllers;
+﻿using Blog.Data;
+using Blog.Entities;
+using Blog.Web.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,16 +17,18 @@ namespace BlogTest
         public async Task IndexReturnsAView()
         {
             // Arrange
-            var controller = new HomeController(repository: null);
+            var mockRepo = new Mock<IBlogService>();
+            mockRepo.Setup(repo => repo.GetPostsAsync())
+                .ReturnsAsync(new List<Post>());
+            var controller = new HomeController(mockRepo.Object);
 
             // Act
             var result = await controller.Index();
 
             // Assert
-            var redirectToActionResult =
-                Assert.IsType<RedirectToActionResult>(result);
-            Assert.Equal("Home", redirectToActionResult.ControllerName);
-            Assert.Equal("Index", redirectToActionResult.ActionName);
+            var viewResult = Assert.IsType<ViewResult>(result);
         }
+
+  
     }
 }
